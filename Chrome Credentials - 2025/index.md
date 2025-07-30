@@ -179,7 +179,7 @@ App Bound Encryption (ABE) is a security feature introduced by Chromium in July 
 It ties cookie decryption to the Chrome application binary, preventing other processes from accessing stored secrets. The profile encryption key is still initially protected by DPAPI, but ABE adds a second layer. That second layer uses a Windows platform key stored in a secure system service, which only SYSTEM can access.
 
 
-![alt text](/assets/img/Chome-App-Bound/screenshots/app-bound-encryption.png?raw=true)
+![alt text](/assets/Chome-App-Bound/screenshots/app-bound-encryption.png?raw=true)
 
 [Google Blog](https://security.googleblog.com/2024/07/improving-security-of-chrome-cookies-on.html)
 
