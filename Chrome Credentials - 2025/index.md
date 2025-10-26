@@ -13,7 +13,7 @@ has_children: true
 In September 2024, I was handed a project that had been collecting dust for a while. It was a kind of browser credential honeypot that needed a script to automatically inject passwords or cookies into the browser. A bit of a crazy idea — but fun nonetheless.
 <br>
 
-I'd already played around with some stealers before, so I knew the basics: credentials live in SQLite databases, BCrypt32 CryptUnprotectData call, the Master key stored on disk, readable with user-level permissions. DPAPI setup.<br>
+I'd already played around with some stealers before, so I knew the basics of the DPAPI setup: credentials live in SQLite databases, BCrypt32 CryptUnprotectData call, the Master key stored on disk, readable with user-level permissions.<br>
 
 I didn’t know Google had just rolled out **Application Bound Encryption cookies protection in July 2024**. The master key is now also DPAPI-protected under the System and User context, and can’t be unwrapped directly by the user. 
 
@@ -23,11 +23,11 @@ By October/November, the first bypass PoCs appeared: <br>
 
 - The second used Chrome’s COM interface — IElevator — to get Chrome to decrypt cookies.
 
-My destiny was to get completely sidetracked by the pleasure of COM interfaces, method pointer blind enumeration and crypto functions declarations. Couldn’t resist. I needed to document this Chrome study somewhere, mostly as a personal reminder — hence, this blog post.
+I needed to document this Chrome study somewhere, mostly as a personal reminder — hence, this blog post.
 
 
 
-## Chrome stored data
+## Chrome stored data reminder 
 <br>
 Chromium-based browsers like Google Chrome, Microsoft Edge, Brave store a variety of sensitive user data, including:
 
@@ -494,9 +494,6 @@ CoSetProxyBlanket(elevator.Get(), RPC_C_AUTHN_DEFAULT, RPC_C_AUTHZ_DEFAULT, COLE
 BSTR bstrPlainKey = nullptr;
 hr = elevator->DecryptData(bstrEncKey, &bstrPlainKey, &comErr);
 ```
-
-
-
 
 ---
 
