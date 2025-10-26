@@ -7,7 +7,7 @@ parent: "Chrome credentials - 2025"
 
 ---
 
-## The new Chrome App Bound Encryption - 2025
+# The new Chrome App Bound Encryption - 2025
 
 <br>
 Time to break down the App Bound Encryption (ABE).
