@@ -3,6 +3,7 @@ layout: post
 title: "Chrome credentials - 2025"
 nav_order: 1
 has_children: true
+permalink: /chrome-credentials/
 
 ---
 
