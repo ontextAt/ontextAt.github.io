@@ -2,7 +2,8 @@
 layout: post
 title: "The new Chrome App Bound Encryption  - 2025"
 nav_order: 2
-has_children: False
+has_children: false
+parent: "Chrome credentials - 2025"
 
 ---
 
