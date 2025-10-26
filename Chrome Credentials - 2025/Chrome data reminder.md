@@ -76,3 +76,78 @@ We can also probably analyze live memory to extract decrypted credentials, cooki
 - **Cons**: Volatile data; higher technical barrier
 
 ---
+
+
+## Passwords decryption 
+<br>
+Chrome uses two distinct encryption strategies: one for saved passwords, another for cookies. Both rely on DPAPI, but cookie path diverged from passwords and got more complex mid-2024 with the addition of Application Bound Encryption. This section breaks down the structure of simple DPAPI. 
+
+### Passwords decryption : simple DPAPI method 
+
+The Master Key: Chrome stores a randomly generated key in the Local State JSON file under os_crypt.encrypted_key. This master key is encrypted using DPAPI (user-bound).
+
+- SQLite %LOCALAPPDATA%\Google\Chrome\User Data\Default\Login Data
+- Get Chrome user level AES Master key  located in  %LOCALAPPDATA%\Microsoft\Edge\User Data\Local State
+- Decrypt MasterKey with CryptUnprotectData
+- Decrypt AES-GCM password with BCryptDecrypt and decrypted Masterkey
+
+#### **DPAPI Decryption** 
+
+Function CryptUnprotectData from dpapi.h decrypt the input DATA_BLOB *pDataIn and stores the result in *pDataOut
+
+```
+DPAPI_IMP BOOL CryptUnprotectData(
+  [in]            DATA_BLOB                 *pDataIn,
+  [out, optional] LPWSTR                    *ppszDataDescr,
+  [in, optional]  DATA_BLOB                 *pOptionalEntropy,
+                  PVOID                     pvReserved,
+  [in, optional]  CRYPTPROTECT_PROMPTSTRUCT *pPromptStruct,
+  [in]            DWORD                     dwFlags,
+  [out]           DATA_BLOB                 *pDataOut
+);
+
+```
+
+DATA_BLOB structure. cbData contains the Length of bytes data and *pbData is a pointer to content bytes data(encrypted/decrypted)
+```
+typedef struct _CRYPTOAPI_BLOB {
+  DWORD cbData;  
+  BYTE  *pbData; 
+} 
+```
+
+#### **Structure of the Chrome AES master key** 
+
+```
+Header = [0..3] // Chrome specific version
+IV = 96 random bit [3..15] 
+CipherText : 16 bit [15..17]
+TAG = 128 bit [-16]
+```
+
+#### **AES-GCM decryption** 
+
+Finally the password encrypted_value can be decrypted using BCryptDecrypt from bcrypt.h with a symetric AES-GCM key 
+
+```
+NTSTATUS BCryptDecrypt(
+  [in, out]           BCRYPT_KEY_HANDLE hKey,
+  [in]                PUCHAR            pbInput,
+  [in]                ULONG             cbInput,AES
+  [out, optional]     PUCHAR            pbOutput,
+  [in]                ULONG             cbOutput,
+  [out]               ULONG             *pcbResult,
+  [in]                ULONG             dwFlags
+);
+```
+
+Bcrypt Algorithm and chaining mode variables
+
+```
+BCRYPT_AES_ALGORITHM = "AES"
+BCRYPT_CHAIN_MODE_GCM = "ChainingModeGCM"
+BCRYPT_CHAINING_MODE = "ChainingMode"
+BCRYPT_AUTH_TAG_LENGTH = "AuthTagLength"
+```
+
+---
