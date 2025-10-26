@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Break down the App Bound Encryption"
+title: "Break down the Chrome Bound Encryption"
 nav_order: 2
 has_children: false
 parent: "Chrome credentials - 2025"
 
 ---
 
-# Break down the Chrome App Bound Encryption 
+# Break down Chrome App Bound Encryption 
 
 <br>
 App Bound Encryption (ABE) is a security feature introduced by Chromium in July 2024 to prevent external programs or other Chromium-based apps from decrypting sensitive user data, even if they are running under the same OS user context.
