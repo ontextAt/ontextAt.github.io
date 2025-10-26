@@ -2,7 +2,8 @@
 layout: post
 title: "Chrome credentials - 2025"
 nav_order: 2
-has_children: true
+has_children: false
+parent: "Chrome credentials - 2025"
 
 ---
 
