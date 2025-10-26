@@ -2,11 +2,6 @@ title: "onTextAt"
 description: Notes and studies on cyber, personal reminders — hence, a blog.
 remote_theme: just-the-docs/just-the-docs
 
-# Sidebar navigation titles for folders
-nav:
-  Chrome Credentials - 2025:
-    title: Chrome Credentials - 2025
-
-nav_order:
-  - index.md
-  - Chrome Credentials - 2025
+just_the_docs:
+  navigation_depth: 3
+  logo: false
