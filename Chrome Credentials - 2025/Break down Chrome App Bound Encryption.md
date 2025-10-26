@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Break down the Chrome Bound Encryption"
-nav_order: 2
+nav_order: 3
 has_children: false
 parent: "Chrome credentials - 2025"
 
