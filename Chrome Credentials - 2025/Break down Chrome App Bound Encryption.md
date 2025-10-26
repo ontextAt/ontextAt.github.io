@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Break down the Chrome Bound Encryption"
+title: "Break down Chrome App Bound Encryption"
 nav_order: 3
 has_children: false
 parent: "Chrome credentials - 2025"
