@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "The new Chrome App Bound Encryption  - 2025"
+title: "Break down the App Bound Encryption"
 nav_order: 2
 has_children: false
 parent: "Chrome credentials - 2025"
 
 ---
 
-# The new Chrome App Bound Encryption - 2025
+# Break down the Chrome App Bound Encryption 
 
 <br>
 Time to break down the App Bound Encryption (ABE).
